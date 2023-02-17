@@ -55,6 +55,7 @@ const MoviesPage = () => {
   }, [query, page]);
 
   const onFormSubmit = query => {
+    setMovies([]);
     setError(null);
     if (query.trim() === '') {
       setError('Please enter something');

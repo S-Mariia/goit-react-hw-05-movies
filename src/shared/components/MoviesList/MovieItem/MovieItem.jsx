@@ -1,4 +1,11 @@
+import MovieRating from "./MovieRating/MovieRating";
+
 const MovieItem = ({ info }) => {
+  const handleRating = rating => {
+    return ((rating / 2) - Math.floor(rating / 2)) >= 0.5 ? Math.floor(rating / 2) + 0.5 : Math.floor(rating / 2);
+  }
+
+
   const { title, poster_path, vote_average } = info;
   return (
     <div>
@@ -8,7 +15,7 @@ const MovieItem = ({ info }) => {
         width={150}
       />
       <p>{title}</p>
-      <p>Rating: {vote_average}</p>
+      <MovieRating value={handleRating(vote_average)} />
     </div>
   );
 };
