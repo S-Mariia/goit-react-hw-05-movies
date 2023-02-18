@@ -1,5 +1,5 @@
 import MovieRating from "./MovieRating/MovieRating";
-import {  Poster, Title } from "./MovieItem.styled";
+import {  Poster, Title, Description } from "./MovieItem.styled";
 
 const MovieItem = ({ info }) => {
   const handleRating = rating => {
@@ -8,15 +8,16 @@ const MovieItem = ({ info }) => {
 
 
   const { title, poster_path, vote_average } = info;
-  return (
-    <div>
+  return (<>
       <Poster
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
         alt={title}
       />
+      <Description>
       <Title>{title}</Title>
       <MovieRating value={handleRating(vote_average)} />
-    </div>
+    </Description>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MovieItem from "./MovieItem/MovieItem";
-import { List, Wrapper } from "./MoviesList.styled";
+import { List, Item, StyledLink } from "./MoviesList.styled";
 
 const MoviesList = ({ items }) => {
     const location = useLocation();
@@ -8,7 +8,7 @@ const MoviesList = ({ items }) => {
     return (
         <List>
             {items.map(item => {
-                return <Wrapper key={item.id}><Link to={`/movies/${item.id}`} state={{ from: location }}><MovieItem info={item} /></Link></Wrapper>
+                return <StyledLink key={item.id} to={`/movies/${item.id}`} state={{ from: location }}><Item><MovieItem info={item} /></Item></StyledLink>
             })}
         </List>
     )
