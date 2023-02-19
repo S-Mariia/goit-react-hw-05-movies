@@ -1,4 +1,4 @@
-import MovieRating from "./MovieRating/MovieRating";
+import MovieRating from "../../MovieRating/MovieRating";
 import {  Poster, Title, Description } from "./MovieItem.styled";
 
 const MovieItem = ({ info }) => {

@@ -1,11 +1,13 @@
-import { StyledLink, List, Item } from "./NavBar.styled";
+import { StyledLink, Navigation, Section } from "./NavBar.styled";
 
 const NavBar = () => {
     return (
-        <List>
-            <Item><StyledLink to="/">Home</StyledLink></Item>
-            <Item><StyledLink to="/movies">Movies</StyledLink></Item>
-        </List>
+        <Section>
+        <Navigation>
+            <StyledLink to="/">Home</StyledLink>
+            <StyledLink to="/movies">Movies</StyledLink>
+        </Navigation>
+        </Section>
     )
 }
 

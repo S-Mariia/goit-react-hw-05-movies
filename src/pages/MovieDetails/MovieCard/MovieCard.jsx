@@ -1,16 +1,25 @@
+import { Section, Description, Image, Title, FlexContainer, Subtitle } from "./MovieCard.styled";
+
+import MovieRating from "shared/components/MovieRating/MovieRating";
+
 const MovieCard = ({ movieDetails }) => {
   if (!movieDetails) {
     return;
   }
   const { title, poster, overview, rating, genres } = movieDetails;
   return (
-    <div>
-      <img src={poster} alt={title} width={300} />
-      <h2>{title}</h2>
-      <p>Rating: {rating}</p>
-      <p>Overview: {overview}</p>
-      {genres && <p>Genres: {genres}</p>}
-    </div>
+    <Section>
+      <Image src={poster} alt={title} />
+      <Description>
+      <Title>{title}</Title>
+      <MovieRating value={rating} />
+      <FlexContainer>
+      <Subtitle>Overview:</Subtitle> <p>{overview}</p> 
+      </FlexContainer>
+      
+      {genres &&  <FlexContainer><Subtitle>Genres:</Subtitle> <p> {genres}.</p></FlexContainer> }
+      </Description>
+    </Section>
   );
 };
 

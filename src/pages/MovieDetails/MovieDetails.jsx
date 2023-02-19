@@ -1,7 +1,9 @@
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieDetails } from 'shared/servises/api-servise';
-import { StyledLink } from './MovieDetails.styled';
+import { StyledLink, Button, Section, List } from './MovieDetails.styled';
+import { Subtitle } from './MovieCard/MovieCard.styled';
+
 
 import MovieCard from './MovieCard/MovieCard';
 import Loader from 'shared/components/Loader/Loader';
@@ -46,25 +48,25 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <>
+    <Section>
       {isLoading === true && <Loader />}
       {movieDetails && (
         <>
-          <Link to={backLinkHref}>Go back</Link>
+          <Button to={backLinkHref}>Go back</Button>
           <MovieCard movieDetails={movieDetails} />
-          <p>Additional information:</p>
-          <ul>
+          <Subtitle>Additional information:</Subtitle>
+          <List>
             <li>
               <StyledLink to="cast">Cast</StyledLink>
             </li>
             <li>
               <StyledLink to="reviews">Reviews</StyledLink>
             </li>
-          </ul>
+          </List>
           <Outlet />
         </>
       )}
-    </>
+    </Section>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Title, Button, BtnWrapper } from './HomePage.styled';
 
 import { getPopularMovies } from 'shared/servises/api-servise';
 
@@ -38,17 +39,19 @@ const HomePage = () => {
   }, [page]);
 
   return (
-    <>
-      <h2>Trending today</h2>
+    <section>
+      <Title>Trending today</Title>
       {isLoading === true && <Loader />}
       <MoviesList items={movies} />
       {error && <p>{error}</p>}
       {showLoadMore && (
-        <button type="button" onClick={() => setPage(prevPage => prevPage + 1)}>
+        <BtnWrapper>
+          <Button type="button" onClick={() => setPage(prevPage => prevPage + 1)}>
           Load more
-        </button>
+        </Button>
+        </BtnWrapper>
       )}
-    </>
+    </section>
   );
 };
 
