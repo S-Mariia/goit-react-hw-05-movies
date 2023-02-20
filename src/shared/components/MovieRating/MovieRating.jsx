@@ -1,4 +1,5 @@
 import ReactStars from "react-rating-stars-component";
+import PropTypes from 'prop-types';
 import { Span, Wrapper } from "./MovieRating.styled";
 
 const MovieRating = ({ value }) => {
@@ -16,6 +17,10 @@ const MovieRating = ({ value }) => {
   </Wrapper>
   
 };
+
+MovieRating.propTypes = {
+  value: PropTypes.number.isRequired,
+}
 
 export default MovieRating;
 

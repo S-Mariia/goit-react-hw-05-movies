@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { BiSearchAlt } from 'react-icons/bi';
+import { Form, Input, Button } from './MoviesSearchForm.styled';
 
+const MoviesSearchForm = ({ onSubmit }) => {
+  const [search, setSearch] = useState('');
 
-const MoviesSearchForm = ({onSubmit}) => {
-    const [search, setSearch] = useState('');
+  const handleChange = e => {
+    const value = e.target.value;
+    setSearch(value);
+  };
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setSearch(value);
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    onSubmit(search);
+    setSearch('');
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(search);
-        setSearch('');
-    }
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Button type="submit">
+        <BiSearchAlt size={32} />
+      </Button>
+      <Input
+        onChange={handleChange}
+        value={search}
+        type="text"
+        name="search"
+        placeholder="Enter movie title"
+      />
+    </Form>
+  );
+};
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input onChange={handleChange} value={search} type="text" name="search" placeholder="Enter movie title" />
-            <button type="submit">Search</button>
-        </form>
-    )
+MoviesSearchForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 }
 
 export default MoviesSearchForm;

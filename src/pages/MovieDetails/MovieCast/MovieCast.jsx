@@ -1,7 +1,11 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { getMovieCast } from 'shared/servises/api-servise';
-import Loader from 'shared/components/Loader/Loader';
+import { List, Item, Description, Image } from './MovieCast.styled';
+import { StyledError } from '../MovieReviews/MovieReviews.styled';
+import personPlaceholder from '../../../shared/images/placeholder-image.jpg';
+
+const Loader = lazy(() => import('shared/components/Loader/Loader'));
 
 const MovieCast = () => {
   const params = useParams();
@@ -19,7 +23,7 @@ const MovieCast = () => {
         const response = await getMovieCast(id);
 
         if (response.length === 0) {
-          throw new Error("Sorry we can't reach cast");
+          throw new Error("Sorry we can't get the cast.");
         }
         setCast(response);
       } catch (error) {
@@ -32,28 +36,25 @@ const MovieCast = () => {
     fetchCast(movieId);
   }, [movieId]);
 
-  //default img
   return (
     <>
       {isLoading === true && <Loader />}
-      {error && <p>{error}</p>}
+      {error && <StyledError>{error}</StyledError>}
 
       {cast.length > 0 && (
-        <ul>
-          {cast.map(({ id, name, character, profile_path }) => {
+        <List>
+          {cast.map(({ name, profile_path }, idx) => {
             return (
-              <li key={id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                  width={150}
+              <Item key={idx}>
+                <Image 
+                  src={profile_path ? `https://image.tmdb.org/t/p/w500${profile_path}` : personPlaceholder}
                   alt={name}
                 />
-                <h3>{name}</h3>
-                <p>Character: {character}</p>
-              </li>
+                <Description>{name}</Description>
+              </Item>
             );
           })}
-        </ul>
+        </List>
       )}
     </>
   );

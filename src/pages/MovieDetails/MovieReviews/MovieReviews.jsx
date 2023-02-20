@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { getMovieReviews } from 'shared/servises/api-servise';
-import Loader from 'shared/components/Loader/Loader';
+import { Item, Title, Text, List, StyledError } from './MovieReviews.styled';
+
+const Loader = lazy(() => import('shared/components/Loader/Loader'));
 
 const MovieReviews = () => {
   const params = useParams();
@@ -19,7 +21,7 @@ const MovieReviews = () => {
         const response = await getMovieReviews(id);
 
         if (response.length === 0) {
-          throw new Error('There are no reviews');
+          throw new Error('There are no reviews.');
         }
         setReviews(response);
       } catch (error) {
@@ -35,18 +37,18 @@ const MovieReviews = () => {
   return (
     <>
       {isLoading === true && <Loader />}
-      {error && <p>{error}</p>}
+      {error && <StyledError>{error}</StyledError>}
       {reviews.length > 0 && (
-        <ul>
-          {reviews.map(({ id, author, content }) => {
+        <List>
+          {reviews.map(({ author, content }, idx) => {
             return (
-              <li key={id}>
-                <h4>{author}</h4>
-                <p>{content}</p>
-              </li>
+              <Item key={idx}>
+                <Title>{author}</Title>
+                <Text>{content}</Text>
+              </Item>
             );
           })}
-        </ul>
+        </List>
       )}
     </>
   );

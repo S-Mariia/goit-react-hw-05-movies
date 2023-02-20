@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { getMovieByName } from 'shared/servises/api-servise';
+import { Button, BtnWrapper } from '../HomePage/HomePage.styled';
 
-import MoviesSearchForm from './MoviesSearchForm/MoviesSearchForm';
-import MoviesList from '../../shared/components/MoviesList/MoviesList';
-import Loader from 'shared/components/Loader/Loader';
+const Loader = lazy(() => import('shared/components/Loader/Loader'));
+const MoviesSearchForm = lazy(() => import('./MoviesSearchForm/MoviesSearchForm'));
+const MoviesList = lazy(() => import('../../shared/components/MoviesList/MoviesList'));
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -54,21 +55,24 @@ const MoviesPage = () => {
     fetchMovies(query, page);
   }, [query, page]);
 
-  const onFormSubmit = query => {
+  const onFormSubmit = title => {
+    if(title === query){
+      return;
+    }
     setMovies([]);
     setError(null);
-    if (query.trim() === '') {
+    if (title.trim() === '') {
       setError('Please enter something');
       return;
     }
-    setSearchParam({ query });
+    setSearchParam({ query: title });
   };
 
   return (
     <div>
       <MoviesSearchForm onSubmit={onFormSubmit} />
       {movies.length > 0 && <MoviesList items={movies} />}
-      {showLoadMore && <button onClick={()=>setPage(prevPage => prevPage + 1)} type="button">Load more</button> }
+      {showLoadMore && (<BtnWrapper><Button onClick={()=>setPage(prevPage => prevPage + 1)} type="button">Load more</Button></BtnWrapper>) }
       {isLoading && <Loader />}
       {error && toast.error(error)}
       <ToastContainer position="top-right" autoClose={3500} />

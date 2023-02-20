@@ -1,12 +1,10 @@
-import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
+import { useState, useEffect, lazy } from 'react';
 import { getMovieDetails } from 'shared/servises/api-servise';
-import { StyledLink, Button, Section, List } from './MovieDetails.styled';
-import { Subtitle } from './MovieCard/MovieCard.styled';
+import { Button, Section } from './MovieDetails.styled';
 
-
-import MovieCard from './MovieCard/MovieCard';
-import Loader from 'shared/components/Loader/Loader';
+const Loader = lazy(() => import('shared/components/Loader/Loader'));
+const MovieCard = lazy(() => import('./MovieCard/MovieCard'));
 
 const MovieDetails = () => {
   const params = useParams();
@@ -54,15 +52,6 @@ const MovieDetails = () => {
         <>
           <Button to={backLinkHref}>Go back</Button>
           <MovieCard movieDetails={movieDetails} />
-          <Subtitle>Additional information:</Subtitle>
-          <List>
-            <li>
-              <StyledLink to="cast">Cast</StyledLink>
-            </li>
-            <li>
-              <StyledLink to="reviews">Reviews</StyledLink>
-            </li>
-          </List>
           <Outlet />
         </>
       )}

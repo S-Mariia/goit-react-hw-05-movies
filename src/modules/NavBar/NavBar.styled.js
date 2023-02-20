@@ -14,7 +14,6 @@ cusor: pointer;
 `;
 
 export const Navigation = styled.nav`
-list-style: none;
 display: flex;
 gap: 16px;
 margin-top: 1px;

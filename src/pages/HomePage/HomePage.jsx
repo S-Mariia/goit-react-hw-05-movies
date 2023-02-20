@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { Title, Button, BtnWrapper } from './HomePage.styled';
 
 import { getPopularMovies } from 'shared/servises/api-servise';
 
-import MoviesList from 'shared/components/MoviesList/MoviesList';
-import Loader from 'shared/components/Loader/Loader';
+const MoviesList = lazy(() => import('shared/components/MoviesList/MoviesList'));
+const Loader = lazy(() => import('shared/components/Loader/Loader'));
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);

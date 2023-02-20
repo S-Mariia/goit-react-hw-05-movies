@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const StyledLink = styled(Link)`
-text-decoration: none;
+export const StyledLink = styled(NavLink)`
 color: #B2AAA9;
+text-transform: uppercase;
+padding: 4px 8px 4px 0;
+font-weight: 500;
 `;
 
 export const Button = styled(Link)`
@@ -24,4 +26,5 @@ padding: 16px 0;
 export const List = styled.ul`
 display: flex;
 gap: 16px;
+margin-top: 20px;
 `;

@@ -13,7 +13,7 @@ width: 40%;
 `;
 
 export const Image = styled.img`
-width: 35%;
+width: 28%;
 `;
 
 export const Title = styled.h2`
@@ -30,4 +30,8 @@ gap: 16px;
 
 export const Subtitle = styled.p`
 color: #C07043;
+`;
+
+export const Text = styled.p`
+text-align: justify;
 `;
