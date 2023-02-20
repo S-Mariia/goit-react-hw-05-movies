@@ -3,13 +3,14 @@ import { Suspense } from "react";
 
 import { Container } from './SharedLayout.styled';
 import NavBar from 'modules/NavBar/NavBar';
+import Loader from '../Loader/Loader';
 
 const SharedLayout = () => {
   return (
     <Container>
       <NavBar />
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
       <Outlet />
       </Suspense>
     </Container>
