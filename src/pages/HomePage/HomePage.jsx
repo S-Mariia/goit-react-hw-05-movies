@@ -19,7 +19,7 @@ const HomePage = () => {
         setIsLoading(true);
         const { results, page, total_pages } = await getPopularMovies(number);
         if (results.length === 0) {
-          throw new Error('Something went wropng. Try to reload the page.');
+          throw new Error('Something went wropng. Please try to reload the page.');
         }
         if (page < total_pages) {
           setShowLoadMore(true);

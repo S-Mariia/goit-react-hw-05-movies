@@ -13,7 +13,7 @@ width: 40%;
 `;
 
 export const Image = styled.img`
-width: 28%;
+width: 29%;
 `;
 
 export const Title = styled.h2`
